@@ -16,7 +16,9 @@ export default class App extends Component {
         places: prevState.places.concat({
           key: `${Math.random()}`,
           name: placeName,
-          image: placeImage
+          image: {
+            uri: "https://http2.mlstatic.com/carimbo-de-madeira-lula-livre-D_NQ_NP_983602-MLB27287802696_052018-F.jpg",
+          }
         })
       };
     });
