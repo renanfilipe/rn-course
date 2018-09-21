@@ -16,7 +16,6 @@ class PlaceInput extends Component {
     if (this.state.placeName.trim() === "") {
       return;
     }
-
     this.props.onPlaceAdded(this.state.placeName);
   };
 
@@ -41,7 +40,6 @@ class PlaceInput extends Component {
 
 const styles = StyleSheet.create({
   inputContainer: {
-    // flex: 1,
     width: "100%",
     flexDirection: "row",
     justifyContent: "space-between",
