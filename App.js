@@ -1,53 +1,27 @@
-import React from 'react';
-import { StyleSheet, Text, TextInput, View, Button } from 'react-native';
+import React, { Component } from "react";
+import { StyleSheet, View } from "react-native";
 
-export default class App extends React.Component {
-	state = {
-		placeName: '',
-		places: [],
-	};
+import PlaceInput from "./src/components/PlaceInput/PlaceInput";
+import PlaceList from "./src/components/PlaceList/PlaceList";
 
-	placeNameChangedHandler = val => {
-		this.setState({placeName: val});
-	};
+export default class App extends Component {
+  state = {
+    places: []
+  };
 
-	placeSubmitHandler = () => {
-		if (this.state.placeName.trim() === '') {
-			return;
-		}
-
-		this.setState(prevState => {
-			return {
-				places: prevState.places.concat(prevState.placeName)
-			}
-		})
-	};
+  placeAddedHandler = placeName => {
+    this.setState(prevState => {
+      return {
+        places: prevState.places.concat(placeName)
+      };
+    });
+  };
 
   render() {
-  	const placesOutput = this.state.places.map((place, i) => {
-  		return (
-  			<Text key={i}>{place}</Text>
-		  )
-	  });
-
     return (
       <View style={styles.container}>
-        <View style={styles.inputContainer}>
-		      <TextInput
-		        placeholder='An awesome place'
-		        value={this.state.placeName}
-		        onChangeText={this.placeNameChangedHandler}
-		        style={styles.placeInput}
-	        />
-	        <Button
-		        title='Add'
-		        style={styles.placeButton}
-		        onPress={this.placeSubmitHandler}
-	        />
-        </View>
-	      <View>
-		      {placesOutput}
-	      </View>
+        <PlaceInput onPlaceAdded={this.placeAddedHandler} />
+        <PlaceList places={this.state.places} />
       </View>
     );
   }
@@ -55,22 +29,10 @@ export default class App extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-  	flex: 1,
-	  padding: 20,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-  },
-	inputContainer: {
-  	width: '100%',
-		flexDirection: 'row',
-		justifyContent: 'space-between',
-		alignItems: 'center',
-	},
-	placeInput: {
-  	width: '70%'
-	},
-	placeButton: {
-  	width: '30%'
-	}
+    flex: 1,
+    padding: 26,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "flex-start"
+  }
 });
